@@ -1,0 +1,101 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\qc\b\f0\fs44\lang9 Big O notation\par
+
+\pard\sa200\sl276\slmult1\qj\fs22\par
+Potreba za big O notacijom?\par
+\b0 Poenta celog ovog kursa jesu algoritmi, resavanje problema, kompijuterska nauka, strukture podataka. Sto se tice svake teme u ovom kursu postoji 10, 20 vrv i vise implementacija ili resenja koja mogu da se primene i koja rade. Kako mi znamo koje resenje je najbolje za odredjeni problem? \b Big O notacija \b0 upravo odgovara na ovo pitanje. To je nacin na koji generalizujemo kod i uporedjemo kod i njegove performanse. Ako postavimo pitanje da se napise funkcija koja prihvata string kao input i treba da vrati obrnutnu kopiju, za resavanje tog problema postoji najmanje deset razlicith nacina da se resi taj problem, \b  \b0 vrv i vise od toga. Na kraju kako da odlucimo koje resenje je nabjolje za taj problem? Zar ne bi bilo lepo da postoji neki sistem da klasifikujemo nas kod i da ga uporedimo. O tome se zapravo radi kod \b big O notacije, \b0 same performanse koda. Koliko je uspesno izvrsavanje naseg koda, to nam daje \b big O notacija. \b0 Naravno ovde se postavljamo jos jedno pitanje a to je dal nas treba da bude briga koje resenje za nas problem najdelotvornije ili najbolje. Ako uspesmo da  napisemo algoritam koji radi zasto bi nas bilo briga za \b big O notaciju \b0 tj da li postoji bolje resenje i bolji algoritam za taj konkretan problem? Naravno u nekim solucijama najbolje resenje je ono koje vi mozete da smislite ali kad pricamo o stvarima kao sto su tehnicki intervjui za poso, neki kod izazovi, ili radite sa nekim velikim podacima gde jedna implementacija algoritama moze da spasi ceo sat svaki put kada se pokrene u poredjenju sa nekim drugim algoritmom, tada su performanse bitne. Ukoliko pokrenemo nas kod i treba mu vise vremena nego sto smo se nadali da se izvrsi, bitno je da mozemo da ustanovimo zbog cega je nas kod spor ili koji delovi koda usporavaju izvrsavanje naseg koda, pomaze da razumemo \b big O notaciju\b0 . Dakle da sumiramo \b big O notacija\b0  nam pomaze da ustanovimo koliko je nas kod uspesan u izvrsavanju i pomaze nam da nadjemo najbolje resenje za nas konrektan problem. Takodje vrlo je cesto pitanje na tehnickim intervjuima, tipa neko moze da pita, "Kazi mi \b big O notaciju \b0 za taj algoritam?" ili "Evo ti tri funkcije, koji je big O za svaku od njih. \par
+Ukoliko imamo ove dve funkcije: \par
+\b function addUpTo(n) \{\par
+  let total = 0;\par
+  for (let i = 1; i <= n; i++) \{\par
+    total += i;\par
+  \}\par
+  return total;\par
+\}\par
+\b0 i \par
+\b function addUpTo2(n) \{\par
+  return (n * (n + 1)) / 2;\par
+\}\par
+\b0 ...kako mozemo da odlucimo koja je bolja? Prva stvar koju mozemo sebe da pitamo, sta zapravo znaci bolje? Da li to znaci brze izvrsavanje koda u sekundama ili milisekundama? Da li to znci da je taj kod brzi kada dodajemo manje brojeve? Ili kada dodajemo velike brojeve? Ili je mozda pitanje dal je nas kod bolji po tome koliko memorije iskoristi da bi izvrsio ove funkcije? Ili je pitanje koliko je promenljivih kreirano svaki put kada je funkcija pozvana? Ili je mozda bolji kod kada je nesto citljivije? Mozemo da se slozimo da je prvo pitanje nekako najverovatnije a to je koja funkcija je brza? Koliko je kodu potrebno da se izvrsi. \par
+Ukoliko uporedimo ova dva koda videcemo da je druga solucija mnogo brza od prve u izvrsavanju. Medjutim kako ne bi morali svaki put da koristimo recimo performance.now() i da merimo manuelno vreme izvrsavanja funkcije, mozemo da koristimo \b big O notaciju. \b0 Medjutim tu postoji jedan problem, zvan \b vreme. \b0 Prvi problem koji se javlja oko vremena jeste sto vreme izvrsavanja koda zavisi od racunara do racunara, kao i do toga u kakvom je stanju sistem, da li je racunar opterecen nekim procesom dok izvrsava neki algoritam i tako dalje. Tako da ako ne mozemo da koristmo vreme sta mozemo dao koristimo da odredimo efikanost i brzinu nekog algoritma. Mozemo da racunamo broj operacija koje kompijuter mora da izvrsi da bi izvrsio algoritam. Broj operacija je nesto sto se ne menja od kompijutera do kompijutera, uvek je isti. Dakel taj broj ce uvek da bude odredjen od broja operacija koje kompijuter mora da izvrsi da bi izvrsio algoritam. \par
+Ako pogledamo ovaj primer koji je bio brzi:\par
+\b function addUpTo2(n) \{\par
+  return (n * (n + 1)) / 2;\par
+\}\par
+\b0 Imamo jednu operaciju mnozelja (*) jednu operaciju sabiranja (+) i jednu operaciju deljenja (/). Brojevi koje koristimo unutar algoritma 1 i 2 se ne menjaju, kompijuter ne treba da radi nista posebno u vezi njih. Dakle u nasoj funkciji postoji tri operacija. Dolazimo do toga da u ovom primeru nije vazno koliko iznosi \b n. \b0 Bilo da je \b n = 2 \b0 ili da je \b n = 1000000000 \b0 uvek ce da budu samo tri operacije koje se desavaju! 3 proste operacije nebitno koliko \b n \b0 iznosi. \par
+Ukoliko to uporedimo sa drugom funkcijom, koja se pokazala kao manje efikasna: \par
+\b function addUpTo(n) \{\par
+  let total = 0;\par
+  for (let i = 1; i <= n; i++) \{\par
+    total += i;\par
+  \}\par
+  return total;\par
+\}\par
+\b0 Ako pocenom od linije total += i, videcemo da tu imamo jednu operaciju sabiranja, ali je ovo sada drugacije, mi se ovde nalazimo u petlji. Ako je \b n = 5 \b0 mi dodajemo 5 stvari, to je 5 operacija sabiranja. Medjutim ako je \b n = 1000000000 \b0 to je onda bilion operacija sabiranja! To je zapravo \b n operacija. \b0 Ako na to dodamo znak jednakosti = i ostale operacije videcemo da prosto vise nije bitno koliko ih je, ono sto je bitno jeste da broj operacija raste kako se \b n \b0 povecava. \b Broj operacija raste proprocionalno sa n. \par
+\par
+ Time complexity:\par
+\b0 Big O notacija nam dozvoljava da razgovaramo formalno o tome kako runtime algoritma raste kako se input (n) povecava. Mi kazemo da algoritam od O(f(n)) ako je broj prostih operacija koje kompijuter mora da obavi manji od konstantnog vremena f(n), kako se n povecava. \par
+1) f(n) moze da bude linear (f(n) = n) => kako input raste tako raste i runtime izvrsavanja algoritma\par
+2) f(n) moze da bude qudratic (f(n) = n2) => kako n raste runtime izvrsavanja raste na kvadrat\par
+3) f(n) moze da bude constant (f(n) = 1) => kako n raste vreme izvrsavanja se ne menja\par
+\par
+\b function addUpTo2(n) \{\par
+  return (n * (n + 1)) / 2;\par
+\}\par
+\b0 ...ovaj primer bi imao Big O(1), uvek ce da budu tri operacije, kako se n povecava to se ne odrazava na runtime algoritma. \par
+\par
+\b function addUpTo(n) \{\par
+  let total = 0;\par
+  for (let i = 1; i <= n; i++) \{\par
+    total += i;\par
+  \}\par
+  return total;\par
+\}\par
+\b0 ... u ovom primeru vidimo Big O(n), broj operacija je vezan za input n. \par
+Kod big O notacije pricamo o najgorem mogucem slucaju, dakle kako se menja runtime tj vreme izvrsavanja algoritma u odnosu na to kako se menja input (n), to je cela fora oko big O notacije. Za sada imamo: \par
+1) O(n) => dakle vreme izvrsavanja se povecava srazmerno kako raste input tj n\par
+2) O(1) => vreme izvrsavanja ostaje konstantno kako raste input tj n\par
+3) O(n2) => vreme izvrsavanja raste n na kvadrat kako raste input tj n \par
+Do sada smo seo fokusirali na vremensku slozenost (time complexity), dakle kako mozemo da analiziramo vreme izvodjenja algoritma u odnosu na to kako se input (n) povecava. \par
+\par
+\b Space complexity: \b0\par
+Sada cemo da pricamo o space complexity. Dakle koliki prostor ce da zauzme nas algoritam dok se izvrsava. \b Big O notacijcu \b0 mozemo da koristimo i za analiziranje prostorne slozenosti (space complexity). Dakle koliko memorije treba da izdvojimo da bi pokrenuli kod u nasem algoritu. Prva stvar koju treba da kazemo jeste da kako se input (n) povecava velicina tog inputa ce se povecavati. Ono na sta mozemo da naletimo jeste na izraz \b "auxiliary space complexity" - \b0 on referise na prostor koji zahteva sam algoritam ali ne i prostor koji zauzima sam input (n). I to je ono o cemu cemo mi da pricamo ovde. Dakle nas zanima samo prostor za sam algoritam koji je potreban. \par
+\b Space complexity in JS:\b0\par
+Vecina primitivnih vrednosti unutar javascripta (booleans, numbers, undefined, null) zauzimaju konstantni prostor. Dakle nije bitno kakav je input da li je neki broj 10 ili 10 miliona zauzimace isti prostor. Ako je boolean vrednost true ili false zauzimace jednaku vrednost \par
+Strings s druge strane su malo drugaciji. Oni zahtevaju O(n) prostora (gde je n zapravo duzina stringa). Ukoliko imamo string od 50 karaktera on ce zauzimati 50 posto vise prostora od stringa sa jednim karakterom. \par
+Slicna filozofija vazi i za arrays i objects unutar javascripta. Referentni tipovi generalno zahtevaju O(n), gde je \b n\b0  duzina array, a sto se tice objekta \b n\b0  je broj kljuceva. Dakle ako uporedimo dva array-a, jedan duzine 4 i drugi duzine 2, ovaj sa duzinom 4 ce zauzimati duplo vise prostora od ovog sa duzinom 2. \par
+Ako uzmemo za primer ovaj algoritam:\par
+\b function sum(arr) \{\par
+  let total = 0;\par
+  for (let i = 0; i < arr.length; i++) \{\par
+    total += arr[i];\par
+  \}\par
+  return total;\par
+\}\b0\par
+Prvo da kazemo da nas sada zanima prostor a ne vreme, dakle sve sto imamo ovde jeste jedna promenljiva \b total\b0  i druga promenljiva \b i\b0  to je sve. Te dve promenlijve postoje bez obzira na input. Mi dodajemo na vec postojecu promenljivu ali ne pravimo novu promenljivu, sto znaci da imamo konstantan prostor \b O(1) space. \b0 Drugim recima prostor ce uvek biti isti, nebitno koliki je nas input (n).\par
+Ako pogledamo sledeci primer: \par
+\b function double(arr) \{\par
+  let newArr = [];\par
+  for (let i = 0; i < arr.length; i++) \{\par
+    newArr.push(2 * arr[i]);\par
+  \}\par
+  return newArr;\par
+\}\b0\par
+Ovde mozemo da primetimo da kako input raste, tj kako se povecava array koji prosledjujemo nasem algoritmu tako ce da raste nas newArr koji vracamo iz funkcije. Dakle nas input ce direktno da utice na nas newArr koji vracamo. Dakle prostor koji zauzimamo je dikretno proporcialan inputu. Sto moze da se zapise na sledeci nacin\b  O(n) space. \b0\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+}
+ 
