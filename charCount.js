@@ -48,5 +48,3 @@ function isAlphaNumberic(char) {
 
 console.log('"hello function number 2"');
 console.log(charCountImproved("hello function number 2"));
-
-// next => section 5: problem sovling patterns
