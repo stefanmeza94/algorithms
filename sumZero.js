@@ -1,19 +1,19 @@
 // Time complexity - O(n^2)
 // Space complexity - O(1)
-// function sumZero(arr) {
-//   for (let i = 0; i < arr.length; i++) {
-//     for (let j = i + 1; j < arr.length; j++) {
-//       if (arr[i] + arr[j] === 0) {
-//         return console.log([arr[i], arr[j]]);
-//       }
-//     }
-//   }
-//   return console.log(undefined);
-// }
+function sumZero(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] + arr[j] === 0) {
+        return console.log([arr[i], arr[j]]);
+      }
+    }
+  }
+  return console.log(undefined);
+}
 
-// sumZero([-3, -2, -1, 0, 1, 2, 3]);
-// sumZero([-2, 0, 1, 3]);
-// sumZero([1, 2, 3]);
+sumZero([-3, -2, -1, 0, 1, 2, 3]);
+sumZero([-2, 0, 1, 3]);
+sumZero([1, 2, 3]);
 
 // Time complexity - O(n)
 // Space complexity - O(1)
