@@ -10,7 +10,7 @@ function bubbleSort(arr) {
         arr[j + 1] = temp;
       }
     }
-    console.log('ONE PASS COMPLETE');
+    console.log("ONE PASS COMPLETE");
   }
   return arr;
 }
@@ -28,7 +28,7 @@ function bubbleSort2(arr) {
         arr[j + 1] = temp;
       }
     }
-    console.log('ONE PASS COMPLETE');
+    console.log("ONE PASS COMPLETE");
   }
 }
 
@@ -45,12 +45,30 @@ function bubbleSort3(arr) {
       console.log(arr, arr[j], arr[j + 1]);
       if (arr[j] > arr[j + 1]) swap(arr, j, j + 1);
     }
-    console.log('ONE PASS COMPLETE');
+    console.log("ONE PASS COMPLETE");
   }
 
   return arr;
 }
 
-bubbleSort3([2, 24, 17, 8]);
+// bubbleSort3([2, 24, 17, 8]);
 
-// nastavi od bubble sort optimization
+// Optimized with no swaps if array is nearly sorted, there is no point to loop through array if array is sorted after first iteration like in this example: [8, 1, 2, 3] => [1, 2, 3, 8]
+function bubbleSort4(arr) {
+  let noSwaps;
+  for (let i = arr.length; i > 0; i--) {
+    noSwaps = true;
+    for (let j = 0; j < i - 1; j++) {
+      console.log(arr, arr[j], arr[j + 1]);
+      if (arr[j] > arr[j + 1]) {
+        const temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+        noSwaps = false;
+      }
+    }
+    if (noSwaps) break;
+  }
+}
+
+bubbleSort4([8, 1, 2, 3]);
