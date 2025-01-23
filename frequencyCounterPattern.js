@@ -44,5 +44,3 @@ function betterSame(arr1, arr2) {
 console.log(betterSame([2, 3, 4], [4, 6, 8]));
 console.log(betterSame([2, 3, 4, 5], [4, 6, 8, 10]));
 console.log(betterSame([1, 3, 2, 1, 4, 5], [1, 9, 16, 25, 1, 4]));
-
-// next 028
